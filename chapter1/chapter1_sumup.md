@@ -75,4 +75,29 @@ for card in sorted(deck,key=spades_high):
 By implementing `__len__` and `__getitem__` on our new class (FrenchDeck), we use the Python's Data model to give the iteration and slicing functionalities on instance of the class, just like any other standard Python sequence (list, tuple, ..).
 
 ## Emulating Numeric Types - 2d Vector
-Given the draft implementation of a 2d vector at [vector2d.py](vector2d.py)
+Given the draft implementation of a 2d vector at [vector2d.py](chapter1/vector2d.py), the author explains how to integrate special methods on a class:
+ - emulating numeric types
+ 
+  -> see `doctest`
+ - string representation of objects
+
+  
+    `__repr__` vs `__str__`:
+    - `__repr__` will display the standard representation of attributes of the instance (helpful for inspection (debugging/logging), e.g `__repr__` will display the attributes with the same type as they are used in constructor)
+
+        `__repr__` is also used in `f-strings` with the `!r`
+    - `__str__` will be used by print() to print an user-friendly representation of the instance
+    If you have not implemented the __str__ then print() will fall-back to `__repr__`
+ - boolean value of object
+
+    Python to evaluate `bool(my_object)`, checks if `__bool__()` or `__len__()` is implemented.
+
+    If `__bool()__` is not implemented then Python will evaluate the `__len__()` if it is implemented and returns zero then the boolean evaluation will return `False`, otherwise it will return `True`.
+
+ - implementing collections
+
+=> this way, we create an API for our newly created `Vector`, which follows the behaviours of built-in functions on standard Python objects.
+That is, the `abs(x)` returns the magnitude of a number (real or imaginery), therefore also our implemented `Vector.__abs__()` will return the magnitude of a 2d vector.
+
+## Further reading
+Python Data Model: https://docs.python.org/3/reference/datamodel.html
